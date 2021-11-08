@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main{
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+dependencies {
+    implementation group: 'org.jogamp.gluegen', name: 'gluegen-rt-main', version:'2.3.2'
+    implementation group: 'org.jogamp.jogl', name: 'jogl-all-main', version:'2.3.2'
+}
