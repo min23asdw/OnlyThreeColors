@@ -1,4 +1,4 @@
-package com.min23asdwPhu.OnlyThreeColors;
+package com.min23asdwPhu.testbase;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
@@ -60,20 +60,24 @@ public class TriangleRotation implements GLEventListener {
 
             // The canvas
             final GLCanvas glcanvas = new GLCanvas( capabilities);
+            //int triangle
             TriangleRotation triangle = new TriangleRotation();
+            // add triangle to canvas
             glcanvas.addGLEventListener( triangle );
             glcanvas.setSize( 400, 400 );
 
             // creating frame
             final JFrame frame = new JFrame ("Rotating Triangle");
 
-            // adding canvas to it
+            // adding canvas to frame
             frame.getContentPane().add( glcanvas );
-            frame.setSize(frame.getContentPane() .getPreferredSize());
+
+            frame.setSize(frame.getContentPane().getPreferredSize());
             frame.setVisible( true );
 
             //Instantiating and Initiating Animator
             final FPSAnimator animator = new FPSAnimator(glcanvas, 300,true);
+            System.out.println("fps = "+ animator.getFPS());
             animator.start();
 
 

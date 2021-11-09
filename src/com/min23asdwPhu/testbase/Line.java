@@ -1,4 +1,4 @@
-package com.min23asdwPhu.OnlyThreeColors;
+package com.min23asdwPhu.testbase;
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
@@ -9,31 +9,29 @@ public class Line implements GLEventListener {
 
     @Override
     public void display(GLAutoDrawable drawable) {
-        final GL2 gl1 = drawable.getGL().getGL2();
-        final GL2 gl2 = drawable.getGL().getGL2();
-        final GL2 gl3 = drawable.getGL().getGL2();
+        final GL2 gl = drawable.getGL().getGL2();
+        gl.glBegin (GL2.GL_LINES);
 
-        gl1.glBegin (GL2.GL_LINES);//static field
-        gl2.glBegin (GL2.GL_LINES);//static field
-        gl3.glBegin (GL2.GL_LINES);//static field
+        //drawing the v
+        gl.glBegin (GL2.GL_LINES);
+        gl.glVertex2f(0.0f, 0.0f);
+        gl.glVertex2f(1.0f, 1.0f);
+        gl.glVertex2f(0.0f, 0.0f);
+        gl.glVertex2f(-1.0f, 1.0f);
+        gl.glEnd();
 
-        // red laser
-        gl1.glVertex2f(0.50f,-0.50f);
-        gl1.glVertex2f(-0.50f,0.50f);
-        gl1.glColor3f(1f,0f,0f);
+        //drawing the right edge
+        gl.glBegin (GL2.GL_LINES);
+        gl.glVertex2f(0f, 0.50f );
+        gl.glVertex2f(-0.50f, -0.50f );
+        gl.glEnd();
 
-        // green laser
-        gl2.glVertex2f(4.0f,-1.50f);
-        gl2.glVertex2f(-5.50f,2.50f);
-        gl2.glColor3f(0f,1f,0f);
-
-        //blue laser
-        gl3.glVertex2f(2.0f,-6.50f);
-        gl3.glVertex2f(-1.50f,3.50f);
-        gl3.glColor3f(0f,0f,1f);
-        gl1.glEnd();
-        gl2.glEnd();
-        gl3.glEnd();
+        //drawing the lft edge
+        gl.glBegin (GL2.GL_LINES);
+        gl.glVertex2f(0f, 0.50f );
+        gl.glVertex2f(0.50f, -0.50f );
+        gl.glEnd();
+       // gl.glFlush();
 
     }
 
@@ -60,11 +58,11 @@ public class Line implements GLEventListener {
 
         // The canvas
         final GLCanvas glcanvas = new GLCanvas(capabilities);
-
+        //int line
         Line l = new Line();  // display
-
+        //add line to canvas
         glcanvas.addGLEventListener(l);
-        glcanvas.setSize(400, 400);
+        glcanvas.setSize(800, 800);
 
         //creating frame
         final JFrame frame = new JFrame ("straight Line");
