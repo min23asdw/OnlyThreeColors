@@ -18,34 +18,14 @@ public class Game_V1 implements GLEventListener {
         // 40 part per axis x , y
         // 1 part = 0.05f = 20px
 
+//        glPushMatrix(); // Save the current working matrix.
+//        glLoadIdentity(); // Makes the new working matrix the identity.
+//        glTrans… // Translate you cude.
+//        drawCUBE_1; // Draw your cube.
+//        glPopMatrix(); // Restore you previous matrix.
+
         final GL2 gl = drawable.getGL().getGL2();
         gl.glClear (GL2.GL_COLOR_BUFFER_BIT |  GL2.GL_DEPTH_BUFFER_BIT );
-
-        // Clear The Screen And The Depth Buffer
-        gl.glLoadIdentity();  // Reset The View
-
-        // Drawing Using line
-
-        //##   laser soure
-        //{***********************************************
-        gl.glBegin(GL2.GL_LINES);
-
-        gl.glVertex2f(-0.5f, 0.6f);
-        gl.glVertex2f(-0.6f, -0.6f);
-
-        //push to int rotation
-        gl.glPushMatrix();
-        //line rotation
-
-        gl.glRotatef( rtri, 0.0f, 1.0f, 0.0f );
-        //pop to out of rotation
-        gl.glPopMatrix();
-
-        gl.glEnd();
-        gl.glFlush();
-        rtri += 0.2f;  //assigning the angle
-        // ***********************************************}
-
 
         //##   drawing the bordor
         //{***********************************************
@@ -72,8 +52,30 @@ public class Game_V1 implements GLEventListener {
             gl.glEnd();
         }
         // ***********************************************}
+        // Push the bordor out of Rotated eff.  by push
+        gl.glPushMatrix();
 
 
+        // Clear The Screen And The Depth Buffer
+        gl.glLoadIdentity();  // Reset The View
+
+        //##   laser soure
+        //{***********************************************
+        //line rotation
+        gl.glRotatef( rtri, 0.0f, 1.0f, 0.0f );
+
+        gl.glBegin(GL2.GL_LINES);
+        // Drawing Using line
+        gl.glVertex2f(-0.5f, 0.6f);
+        gl.glVertex2f(-0.6f, -0.6f);
+
+        gl.glEnd();
+        gl.glFlush();
+        rtri += 0.2f;  //assigning the angle
+        // ***********************************************}
+
+        //Put the frame back on without being affected.  by pop
+        gl.glPopMatrix();
 
     }
 
