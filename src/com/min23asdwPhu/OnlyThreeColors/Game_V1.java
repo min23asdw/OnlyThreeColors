@@ -1,5 +1,6 @@
 package com.min23asdwPhu.OnlyThreeColors;
 
+import com.jogamp.graph.geom.Vertex;
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
@@ -25,7 +26,7 @@ public class Game_V1 implements GLEventListener {
 //        glPopMatrix(); // Restore you previous matrix.
 
         final GL2 gl = drawable.getGL().getGL2();
-        gl.glClear (GL2.GL_COLOR_BUFFER_BIT |  GL2.GL_DEPTH_BUFFER_BIT );
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
 
         //##   drawing the bordor
         //{***********************************************
@@ -119,8 +120,8 @@ public class Game_V1 implements GLEventListener {
 
 
         // make it refresh (fps)
-        final FPSAnimator animator = new FPSAnimator(glcanvas, 60,true);
-        System.out.println("fps = "+ animator.getFPS());
+        final FPSAnimator animator = new FPSAnimator(glcanvas, 60, true);
+        System.out.println("fps = " + animator.getFPS());
         animator.start();
 
     }//end of main
