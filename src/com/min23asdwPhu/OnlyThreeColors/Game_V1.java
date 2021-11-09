@@ -7,10 +7,12 @@ import com.jogamp.opengl.util.FPSAnimator;
 
 import javax.swing.JFrame;
 
+import static com.jogamp.opengl.GL2GL3.GL_LINE;
 import static java.lang.Math.*;
 
 public class Game_V1 implements GLEventListener {
 
+    private static final int GL_FRONT_AND_BACK = 1;
     private float rtri;  //for angle of line  rotation
 
     @Override
@@ -24,6 +26,9 @@ public class Game_V1 implements GLEventListener {
 //        glTrans… // Translate you cude.
 //        drawCUBE_1; // Draw your cube.
 //        glPopMatrix(); // Restore you previous matrix.
+//        gl.glBegin(GL2.GL_LINES); // Drawing Using Line (2 point)
+//        gl.glBegin(GL2.GL_POLYGON); // Drawing Using POLYGON
+//        gl.glBegin( GL2.GL_TRIANGLES ); // Drawing Using Triangles
 
         final GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
@@ -53,25 +58,97 @@ public class Game_V1 implements GLEventListener {
             gl.glEnd();
         }
         // ***********************************************}
+
+
+//        //##   drawing the circle
+//        //{***********************************************
+//        int numVertices = 20;
+//        double radius = 0.5;
+//        // approximate  a circle with a polygon
+//        gl.glBegin(GL2.GL_POLYGON);
+//
+//        {
+//            double angle = 0;
+//            double angleIncrement = 2 * Math.PI / numVertices;
+//            for (int i = 0; i < numVertices; i++) {
+//                angle = i * angleIncrement;
+//                double x = radius * Math.cos(angle);
+//                double y = radius * Math.sin(angle);
+//                gl.glVertex2d(x, y);
+//            }
+//        }
+//        gl.glEnd();
+//        // ***********************************************}
+
         // Push the bordor out of Rotated eff.  by push
         gl.glPushMatrix();
-
-
         // Clear The Screen And The Depth Buffer
         gl.glLoadIdentity();  // Reset The View
 
         //##   laser soure
         //{***********************************************
         //line rotation
-        gl.glRotatef( rtri, 0.0f, 1.0f, 0.0f );
+//        gl.glRotatef(rtri, 0.0f, 0.0f, 1.0f);
 
-        gl.glBegin(GL2.GL_LINES);
-        // Drawing Using line
-        gl.glVertex2f(-0.5f, 0.6f);
-        gl.glVertex2f(-0.6f, -0.6f);
 
+
+       // Drawing polygon box Using point
+        gl.glBegin(GL2.GL_POLYGON);// approximate  a  box with a polygon
+        for (int j = 1; j <= 4; j++) {
+            float point_x = 0.05f;
+            float point_y = 0.05f;
+
+            if (j == 1) { // point a
+                gl.glVertex2f(point_x, point_y);
+                gl.glVertex2f(-point_x, point_y);
+            }
+            if (j == 2) {  // point b
+                gl.glVertex2f(-point_x, point_y);
+                gl.glVertex2f(-point_x, -point_y);
+            }
+            if (j == 3) {
+                gl.glVertex2f(-point_x, -point_y);
+                gl.glVertex2f(point_x, -point_y);
+            }
+            if (j == 4) {
+                gl.glVertex2f(point_x, -point_y);
+                gl.glVertex2f(point_x, point_y);
+            }
+
+        }
         gl.glEnd();
+
+        // laser drawn
+        float length_laser = 5f;
+        float point_Ax = 0.8f;
+        float point_Ay = -0.2f;
+
+        float point_Bx = -0.2f;
+        float point_By = -0.9f;
+
+        float point_Cx = (point_Ax + point_Bx) * 0.5f;
+        float point_Cy = (point_Ay + point_By) * 0.5f;
+
+        float zeta = (float) (atan((point_Ay - point_By) / (point_Bx - point_Ax)));
+        float point_Dx = (float) (point_Cx + length_laser * (sin(zeta)));
+        float point_Dy = (float) (point_Cy + length_laser * (cos(zeta)));
+
+        System.out.println("atan Dx = " + zeta);
+        System.out.println("sin atan Dx = " + sin(zeta));
+        System.out.println("atan Dy = " + zeta);
+        System.out.println("cos atan Dy = " + cos(zeta));
+//        System.out.println("point_Dy = " + point_Dy );
+        gl.glBegin(GL2.GL_LINES);
+        gl.glVertex2f(point_Ax, point_Ay);
+        gl.glVertex2f(point_Bx, point_By);
+
+        gl.glVertex2f(point_Cx, point_Cy);
+        gl.glVertex2f(point_Dx, point_Dy);
+        gl.glEnd();
+
         gl.glFlush();
+
+
         rtri += 0.2f;  //assigning the angle
         // ***********************************************}
 
