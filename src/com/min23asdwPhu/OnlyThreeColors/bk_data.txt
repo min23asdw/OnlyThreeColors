@@ -1,0 +1,26 @@
+        //drawing the bordor
+//        for(int i = 1 ; i <= 20 ; i++){
+//            float point_x = i*0.05f;
+//            float point_y = i*0.05f;
+//
+//            for (int j = 1 ; j<= 4 ; j++){
+//                gl.glBegin (GL2.GL_LINES);
+//                if(j == 1){
+//                    gl.glVertex2f(point_x, point_y);
+//                    gl.glVertex2f(-point_x, point_y);
+//                }
+//                if(j == 2){
+//                    gl.glVertex2f(-point_x, point_y);
+//                    gl.glVertex2f(-point_x, -point_y);
+//                }
+//                if(j == 3){
+//                    gl.glVertex2f(-point_x, -point_y);
+//                    gl.glVertex2f(point_x, -point_y);
+//                }
+//                if(j == 4){
+//                    gl.glVertex2f(point_x, -point_y);
+//                    gl.glVertex2f(point_x, point_y);
+//                }
+//           gl.glEnd();
+//            }
+//        }
