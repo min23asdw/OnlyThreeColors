@@ -1,4 +1,4 @@
-package com.min23asdwPhu.testbase;
+ 
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.GLAutoDrawable;

@@ -1,4 +1,4 @@
-package com.min23asdwPhu.OnlyThreeColors;
+ 
 
 import com.jogamp.opengl.*;
 import com.jogamp.opengl.awt.GLCanvas;

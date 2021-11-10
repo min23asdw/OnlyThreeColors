@@ -1,4 +1,4 @@
-package com.min23asdwPhu.OnlyThreeColors;
+ 
 
 import com.jogamp.graph.geom.Vertex;
 import com.jogamp.opengl.*;
@@ -93,57 +93,80 @@ public class Game_V1 implements GLEventListener {
 
 
        // Drawing polygon box Using point
-        gl.glBegin(GL2.GL_POLYGON);// approximate  a  box with a polygon
-        for (int j = 1; j <= 4; j++) {
-            float point_x = 0.05f;
-            float point_y = 0.05f;
-
-            if (j == 1) { // point a
-                gl.glVertex2f(point_x, point_y);
-                gl.glVertex2f(-point_x, point_y);
-            }
-            if (j == 2) {  // point b
-                gl.glVertex2f(-point_x, point_y);
-                gl.glVertex2f(-point_x, -point_y);
-            }
-            if (j == 3) {
-                gl.glVertex2f(-point_x, -point_y);
-                gl.glVertex2f(point_x, -point_y);
-            }
-            if (j == 4) {
-                gl.glVertex2f(point_x, -point_y);
-                gl.glVertex2f(point_x, point_y);
-            }
-
-        }
-        gl.glEnd();
+//        gl.glBegin(GL2.GL_POLYGON);// approximate  a  box with a polygon
+//        for (int j = 1; j <= 4; j++) {
+//            float point_x = 0.05f;
+//            float point_y = 0.05f;
+//
+//            if (j == 1) { // point a
+//                gl.glVertex2f(point_x, point_y);
+//                gl.glVertex2f(-point_x, point_y);
+//            }
+//            if (j == 2) {  // point b
+//                gl.glVertex2f(-point_x, point_y);
+//                gl.glVertex2f(-point_x, -point_y);
+//            }
+//            if (j == 3) {
+//                gl.glVertex2f(-point_x, -point_y);
+//                gl.glVertex2f(point_x, -point_y);
+//            }
+//            if (j == 4) {
+//                gl.glVertex2f(point_x, -point_y);
+//                gl.glVertex2f(point_x, point_y);
+//            }
+//
+//        }
+//        gl.glEnd();
 
         // laser drawn
-        float length_laser = 5f;
-        float point_Ax = 0.8f;
-        float point_Ay = -0.2f;
+        float length_laser = 0.5f;
+        float point_Ax = 0.2f;
+        float point_Ay = 0.0f;
 
         float point_Bx = -0.2f;
-        float point_By = -0.9f;
+        float point_By = 0.0f;
 
         float point_Cx = (point_Ax + point_Bx) * 0.5f;
         float point_Cy = (point_Ay + point_By) * 0.5f;
 
         float zeta = (float) (atan((point_Ay - point_By) / (point_Bx - point_Ax)));
-        float point_Dx = (float) (point_Cx + length_laser * (sin(zeta)));
-        float point_Dy = (float) (point_Cy + length_laser * (cos(zeta)));
+        zeta = (float) ((Math.PI/2)- zeta);
+        float point_Dx = (float) (point_Cx + length_laser * (cos(zeta)));
+        float point_Dy = (float) (point_Cy + length_laser * (sin(zeta)));
 
-        System.out.println("atan Dx = " + zeta);
-        System.out.println("sin atan Dx = " + sin(zeta));
-        System.out.println("atan Dy = " + zeta);
-        System.out.println("cos atan Dy = " + cos(zeta));
-//        System.out.println("point_Dy = " + point_Dy );
         gl.glBegin(GL2.GL_LINES);
         gl.glVertex2f(point_Ax, point_Ay);
         gl.glVertex2f(point_Bx, point_By);
 
         gl.glVertex2f(point_Cx, point_Cy);
+        // Cal where D x y
         gl.glVertex2f(point_Dx, point_Dy);
+
+//        if(point_By == point_Ay){  // 0 or 180 degreee
+//            if(point_Bx > point_Ax){
+//                gl.glVertex2f(point_Dx, point_Dy);
+//            }
+//            else {
+//                gl.glVertex2f(-point_Dx, -point_Dy);
+//            }
+//        }
+//        else if(point_Bx == point_Ax){  // 90 ro 270 degreee
+//            if(point_By > point_Ay){
+//                gl.glVertex2f(point_Dx, point_Dy);
+//            }
+//            else {
+//                gl.glVertex2f(-point_Dx, -point_Dy);
+//            }
+//        }else {  // another degree use y axis to known
+//
+//            if(point_By > point_Ay){
+//                gl.glVertex2f(point_Dx, point_Dy);
+//            }else if(point_By < point_Ay) {
+//                gl.glVertex2f(-point_Dx, -point_Dy);
+//            }
+//
+//        }
+
         gl.glEnd();
 
         gl.glFlush();
