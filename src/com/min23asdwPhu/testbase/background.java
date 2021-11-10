@@ -26,31 +26,33 @@ public class background implements GLEventListener {
         gl.glEnable(GL2.GL_TEXTURE_2D);
         gl.glBindTexture(GL2.GL_TEXTURE_2D , textureId);
 
-        gl.glPushMatrix();
-
-
         gl.glOrtho(0,1,0,1,0,1);
 
         gl.glLoadIdentity();
 
         try{
-            File im = new File("C:\\Users\\intel\\github\\Game_java\\OnlyThreeColors\\src\\test.png");
+            File im = new File("./texture/bk_basic.jpg");
             Texture t2 = TextureIO.newTexture(im,true);
             textureId = t2.getTextureObject(gl);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         gl.glBegin(GL2.GL_POLYGON);
-            gl.glTexCoord2f(0f,0f);gl.glVertex2f(0,0);
-            gl.glTexCoord2f(0f,1f);gl.glVertex2f(0,1f);
-            gl.glTexCoord2f(1f,1f);gl.glVertex2f(1,1);
-            gl.glTexCoord2f(1f,0f);gl.glVertex2f(1,0);
+        gl.glTexCoord2f(0f,0f);gl.glVertex2f(-1f,-1f);
+        gl.glTexCoord2f(0f,1f);gl.glVertex2f(-1f,1f);
+        gl.glTexCoord2f(1f,1f);gl.glVertex2f(1f,1f);
+        gl.glTexCoord2f(1f,0f);gl.glVertex2f(1f,-1f);
         gl.glEnd();
 
         gl.glDepthMask(true);
+
+        gl.glPushMatrix();
+
+
+
         gl.glPopMatrix();
+        gl.glFlush();
 
 
 
@@ -92,7 +94,7 @@ public class background implements GLEventListener {
         frame.setSize(frame.getContentPane().getPreferredSize());
         frame.setVisible(true);
 
-        final FPSAnimator animator = new FPSAnimator(gc, 200,true);
+        final FPSAnimator animator = new FPSAnimator(gc, 60,true);
         animator.start();
     }
 
